@@ -10,7 +10,21 @@ with open('config.json', 'r') as f:
 
 input_folder_path = config['input_folder_path']
 output_folder_path = config['output_folder_path']
-final_data_file = 'finaldata.csv'
+final_data_path = 'finaldata.csv'
+record_path = './ingesteddata/ingestedfiles.txt'
+
+
+def write_records():
+    date_time_object = datetime.now()
+    now = str(date_time_object.year) + '/' + str(date_time_object.month) + '/' + str(date_time_object.day)
+    data = pd.read_csv('./{}/{}'.format(output_folder_path, final_data_path))
+    all_records = [output_folder_path, record_path, len(data.index), now]
+
+    file = open(record_path, 'w')
+    for element in all_records:
+        file.write(str(element))
+        file.write('\n')
+    file.close()
 
 
 # Function for data ingestion
@@ -32,9 +46,11 @@ def merge_multiple_dataframe():
     if os.path.isdir(output_folder_path) is False:
         print('hello')
         os.makedirs(output_folder_path)
-        final_dataframe.to_csv('./{}/{}'.format(output_folder_path, final_data_file))
+        final_dataframe.to_csv('./{}/{}'.format(output_folder_path, final_data_path))
     else:
-        final_dataframe.to_csv('./{}/{}'.format(output_folder_path, final_data_file))
+        final_dataframe.to_csv('./{}/{}'.format(output_folder_path, final_data_path))
+
+    write_records()
 
 
 if __name__ == '__main__':
