@@ -44,7 +44,6 @@ def merge_multiple_dataframe():
                 print(e)
 
     if os.path.isdir(output_folder_path) is False:
-        print('hello')
         os.makedirs(output_folder_path)
         final_dataframe.to_csv('./{}/{}'.format(output_folder_path, final_data_path))
     else:
