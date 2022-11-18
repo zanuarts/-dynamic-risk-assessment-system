@@ -22,14 +22,10 @@ model_name = 'trainedmodel.pkl'
 def train_model():
     data = pd.read_csv(os.getcwd() + '/' + dataset_csv_path + data_path)
 
-    print(data.columns)
-
     x = data.drop(['Unnamed: 0', 'corporation', 'exited'], axis=1)
     y = data['exited']
 
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, shuffle=True)
-
-    print(x_train, y_train)
 
     # use this logistic regression for training
     model = LogisticRegression(

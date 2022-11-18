@@ -1,4 +1,4 @@
 ingesteddata
 ./ingesteddata/ingestedfiles.txt
 36
-2022/11/12
+2022/11/18

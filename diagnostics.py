@@ -5,6 +5,8 @@ import timeit
 import os
 import json
 import joblib
+import training
+import ingestion
 
 # Load config.json and get environment variables
 with open('config.json','r') as f:
@@ -76,14 +78,24 @@ def dataframe_summary():
 # Function to get timings
 def execution_time():
     # calculate timing of training.py and ingestion.py
+    exec_time = []
+    files = [training.train_model(), ingestion.merge_multiple_dataframe()]
+
+    for file in files:
+        start = timeit.default_timer()
+        file
+        end = timeit.default_timer()
+        time = (end-start)
+        exec_time.append(time)
 
     # return a list of 2 timing values in seconds
-    return
+    return exec_time
 
 # Function to check dependencies
 def outdated_packages_list():
     #get a list of
-    pass
+    outdate = os.system("pip list --outdated")
+    return outdate
 
 
 if __name__ == '__main__':
